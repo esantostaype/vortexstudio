@@ -1,24 +1,35 @@
 ---
+import { Button } from '../../components';
+import Contact from '../../components/home/Contact.astro';
+import Projects from '../../components/home/Projects.astro';
+import { Process } from '../../components';
 import Layout from '../../layouts/Layout.astro';
+import { getProjects, getServices, getServiceBy } from '../../services/vortex'
 
-export const getServices = async () => {
-    const services = await fetch( "https://vortex-strapi-production.up.railway.app/api/services" );
-    const { data } = await services.json();
-    return data;
-}
-
-interface ServiceData {
+interface Service {
+    id: string;
     attributes: {
-        color: string;
-        icon: string;
         name: string;
-        shortDescription: string;
         slug: string;
     };
 }
 
+interface ServiceData {
+    attributes: {
+        name: string;
+        shortDescription: string;
+        image: {
+            data: {
+                attributes: {
+                    url: string;
+                }
+            }
+        };
+    };
+}
+
 export async function getStaticPaths() {
-    const services: ServiceData[] = await getServices();
+    const services: Service[] = await getServices();
     return services.map(( service ) => ({
         params: { slug: service.attributes.slug },
         props: { service }
@@ -26,8 +37,11 @@ export async function getStaticPaths() {
 }
 
 const { service } = Astro.props;
-const { name, shortDescription } = service.attributes;
 
+const serviceData: ServiceData = await getServiceBy( service.id );
+const { name, shortDescription, image } = serviceData.attributes;
+
+const projects = await getProjects();
 ---
 
 <Layout title={ `${ name } - Vortex Studio` } >
@@ -38,12 +52,18 @@ const { name, shortDescription } = service.attributes;
                     <span class="animate-fade-right animate-duration-1000 animate-ease-in-out animate-fill-both">{ name }</span>
                 </h1>
                 <p class="animate-fade-right animate-duration-1000 animate-delay-200 animate-ease-in-out animate-fill-both">{ shortDescription }</p>
+                <div class="animate-fade-right animate-duration-1000 animate-delay-300 animate-ease-in-out animate-fill-both">
+                    <Button size='main' hashTo="contact" label="Cotiza nuestro Servicio" client:load/>
+                </div>
             </div>
             <div class="main__image animate-fade-up animate-duration-1000 animate-delay-300 animate-ease-in-out animate-fill-both">
-                <img src="/images/sitios-web.svg" alt={ name }>
+                <img src={ image.data.attributes.url } alt={ name }>
             </div>
         </section>
+        <Process client:visible/>
     </section>
+	<Projects projects={ projects } title="Últimos proyectos" />
+	<Contact />
 </Layout>
 
 <style>

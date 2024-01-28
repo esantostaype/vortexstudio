@@ -13,7 +13,7 @@ export const getServices = async () => {
 }
 
 export const getServiceBy = async ( id: string ) => {
-    const service = await fetch( API_URL + `/api/services/${ id }?[fields]=name&[fields]=shortDescription&populate[image][fields][0]=url&populate[process][fields]=title,description&populate[process][populate][icon][fields][0]=url&&populate[process][populate][image][fields][0]=url` );
+    const service = await fetch( API_URL + `/api/services/${ id }?[fields]=name&[fields]=slug&[fields]=shortDescription&populate[image][fields][0]=url&populate[process][fields]=title,description&populate[process][populate][icon][fields][0]=url&&populate[process][populate][image][fields][0]=url` );
     const { data } = await service.json();
     return data;
 }
