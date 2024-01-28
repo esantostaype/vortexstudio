@@ -7,7 +7,7 @@ export const getHome = async () => {
 }
 
 export const getServices = async () => {
-    const services = await fetch( API_URL + "/api/services" );
+    const services = await fetch( API_URL + "/api/services?populate[image][fields][0]=url&populate[icon][fields][0]=url&populate[process][fields]" );
     const { data } = await services.json();
     return data;
 }

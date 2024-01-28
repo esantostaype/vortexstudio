@@ -1,7 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import Icon from "../ui/Icon.astro";
+import { Button } from "../../components";
 const { service } = Astro.props;
 const { color, icon, name, shortDescription, slug } = service.attributes;
+const iconService = icon.data.attributes.url;
 ---
 
 <li class="grid__item">
@@ -9,16 +12,11 @@ const { color, icon, name, shortDescription, slug } = service.attributes;
         <a href={ `/servicios/${ slug }` }>{ name }</a>
     </h2>
     <a href={ `/servicios/${ slug }` } class="icon">
-        <Icon width='48px' height='48px' name={ icon } />
+        <Image src={ iconService } alt={ name } height="48" width="48">
         <span style={`background-color: #${ color };`}></span>
     </a>
     <p>{ shortDescription }</p>
-    <a href={ `/servicios/${ slug }` } class="small-button">
-        <span class="small-button__label">Conoce más</span>
-        <span class="small-button__icon">
-            <Icon width='10px' viewBox="0 0 16 16" height='10px' name="arrow" />
-        </span>
-    </a>
+    <Button size='small' label='Conoce más' isLink link={ `/servicios/${ slug }` } />
 </li>
 
 <style>
@@ -59,18 +57,18 @@ const { color, icon, name, shortDescription, slug } = service.attributes;
         z-index: 1;
     }
 
-    .icon svg {
+    .icon img {
         position: relative;
         z-index: 2;
     }
 
-    . p {
+    p {
         font-size: 14px;
         line-height: 1.5em;
         margin: 16px 0 24px;
     }
 
-    .:hover .icon span{
+    .grid__item:hover .icon span{
         transform: scale(1.3);
     }
 </style>
