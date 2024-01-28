@@ -40,6 +40,7 @@ const { service } = Astro.props;
 
 const serviceData: ServiceData = await getServiceBy( service.id );
 const { name, shortDescription, image } = serviceData.attributes;
+const serviceImage = image.data.attributes.url;
 
 const projects = await getProjects();
 ---
@@ -57,7 +58,7 @@ const projects = await getProjects();
                 </div>
             </div>
             <div class="main__image animate-fade-up animate-duration-1000 animate-delay-300 animate-ease-in-out animate-fill-both">
-                <!-- <img src={ image.data.attributes.url } alt={ name }> -->
+                <img src={ serviceImage } alt={ name }>
             </div>
         </section>
         <Process client:visible/>
