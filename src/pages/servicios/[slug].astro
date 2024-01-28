@@ -39,19 +39,19 @@ export async function getStaticPaths() {
 const { service } = Astro.props;
 
 const serviceData: ServiceData = await getServiceBy( service.id );
-// const { name, shortDescription, image } = serviceData.attributes;
+const { name, shortDescription, image } = serviceData.attributes;
 
 const projects = await getProjects();
 ---
 
-<Layout title={ `test - Vortex Studio` } >
+<Layout title={ `${ name } - Vortex Studio` } >
     <section class="service-page" data-scroll-section>
         <section class="service-page__main main-row">
             <div class="main__caption">
                 <h1 class="title">
-                    <span class="animate-fade-right animate-duration-1000 animate-ease-in-out animate-fill-both">test</span>
+                    <span class="animate-fade-right animate-duration-1000 animate-ease-in-out animate-fill-both">{ name }</span>
                 </h1>
-                <p class="animate-fade-right animate-duration-1000 animate-delay-200 animate-ease-in-out animate-fill-both">test</p>
+                <p class="animate-fade-right animate-duration-1000 animate-delay-200 animate-ease-in-out animate-fill-both">{ shortDescription }</p>
                 <div class="animate-fade-right animate-duration-1000 animate-delay-300 animate-ease-in-out animate-fill-both">
                     <Button size='main' hashTo="contact" label="Cotiza nuestro Servicio" client:load/>
                 </div>
