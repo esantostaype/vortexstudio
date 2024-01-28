@@ -1,10 +1,15 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
+import { Header } from '@/components';
+import Global from "@/styles/Global.astro"
+import Footer from '@/components/Footer.astro';
+
 interface Props {
 	title: string;
+	isHome?: boolean;
 }
 
-const { title } = Astro.props;
-import { ViewTransitions } from 'astro:transitions';
+const { title, isHome } = Astro.props;
 ---
 
 <!doctype html>
@@ -13,41 +18,18 @@ import { ViewTransitions } from 'astro:transitions';
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
+		<link rel="icon" type="image/svg+xml" href="/images/favicon/favicon.svg" />
+		<meta name="generator" content={ Astro.generator } />
 		<title>{title}</title>
 		<ViewTransitions />
 	</head>
-	<body>
-		<slot />
+	<body class=`${ isHome && "isHome" }` data-scroll-container>		
+		<main class="main" data-scroll-section>
+			<Header client:load transition:name="header"/>
+			<slot />
+			<Footer/>
+		</main>
 	</body>
 </html>
-<style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-		background-size: 224px;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
-</style>
+
+<Global/>
