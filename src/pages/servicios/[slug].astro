@@ -1,0 +1,111 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export const getServices = async () => {
+    const services = await fetch( "https://vortex-strapi-production.up.railway.app/api/services" );
+    const { data } = await services.json();
+    return data;
+}
+
+interface ServiceData {
+    attributes: {
+        color: string;
+        icon: string;
+        name: string;
+        shortDescription: string;
+        slug: string;
+    };
+}
+
+export async function getStaticPaths() {
+    const services: ServiceData[] = await getServices();
+    return services.map(( service ) => ({
+        params: { slug: service.attributes.slug },
+        props: { service }
+    }) )
+}
+
+const { service } = Astro.props;
+const { name, shortDescription } = service.attributes;
+
+---
+
+<Layout title={ `${ name } - Vortex Studio` } >
+    <section class="service-page" data-scroll-section>
+        <section class="service-page__main main-row">
+            <div class="main__caption">
+                <h1 class="title">
+                    <span class="animate-fade-right animate-duration-1000 animate-ease-in-out animate-fill-both">{ name }</span>
+                </h1>
+                <p class="animate-fade-right animate-duration-1000 animate-delay-200 animate-ease-in-out animate-fill-both">{ shortDescription }</p>
+            </div>
+            <div class="main__image animate-fade-up animate-duration-1000 animate-delay-300 animate-ease-in-out animate-fill-both">
+                <img src="/images/sitios-web.svg" alt={ name }>
+            </div>
+        </section>
+    </section>
+</Layout>
+
+<style>
+    .service-page{
+        padding-bottom: 60px;
+    }
+
+    .service-page__main{
+        align-items: center;
+        display: flex;
+        gap: 40px;
+        padding-top: 60px;
+    }
+
+    .main__caption{
+        flex: 4;
+    }
+
+    .main__image{
+        flex: 5;
+    }
+
+    .title {
+        color: #000;
+        font-size: 4em;
+        font-weight: bold;
+        line-height: 0.9em;
+        width: 80%;
+    }
+
+    .title span{
+        display: block;
+    }
+
+    .title__typing{
+        color: var(--purple);
+    }
+
+    .main__caption p{
+        font-size: 1.125em;
+        line-height: 1.5em;
+        margin: 10px 0 30px;
+        width: 80%;
+    }
+
+    .title__typing{
+        color: var(--purple);
+        align-items: center;
+        display: flex;
+    }
+
+    .title__typing::after{
+        animation-name: blinker;
+        animation-iteration-count: infinite;
+        animation-duration: 1s;
+        content: '|';
+        font-weight: 200;
+    }
+
+    @keyframes blinker {
+        0% { opacity: 1; }
+        50% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+</style>
