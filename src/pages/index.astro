@@ -7,6 +7,13 @@ export const getHome = async () => {
     return data;
 }
 
+export const getServices = async () => {
+    const services = await fetch( "https://vortex-strapi-production.up.railway.app/api/services" );
+    const { data } = await services.json();
+    return data;
+}
+const dataServices = await getServices();
+
 const dataHome = await getHome();
 const hero = dataHome.attributes.hero;
 const { titleLine1, titleLine2, titleLine3, subtitle, video, videoPoster } = hero;
@@ -27,6 +34,18 @@ const heroVideoPoster = videoPoster.data.attributes.url;
 					<h2 class="animate-fade-right animate-duration-1000 animate-delay-300 animate-ease-in-out animate-fill-both">{ subtitle }</h2>
 				</div>
 			</div>
+		</div>
+	</section>
+	<section class="block-section">
+		<div class="main-row-normal">
+			<ul class="grid__list">
+				{ 
+					dataServices.attributes.map && dataServices.attributes.map.length > 0
+					? dataServices.attributes.map.map(( service: any, index: number ) => (
+						<h2>{ service.name }</h2>
+					)) : "No Service Found"
+				}
+			</ul>
 		</div>
 	</section>
 </Layout>
