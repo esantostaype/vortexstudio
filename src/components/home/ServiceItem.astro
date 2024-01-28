@@ -12,7 +12,7 @@ const iconService = icon.data.attributes.url;
         <a href={ `/servicios/${ slug }` }>{ name }</a>
     </h2>
     <a href={ `/servicios/${ slug }` } class="icon">
-        <Image src={ iconService } alt={ name } height="48" width="48">
+        <Image src={ iconService } alt={ name } height="48" width="48" />
         <span style={`background-color: #${ color };`}></span>
     </a>
     <p>{ shortDescription }</p>
