@@ -1,0 +1,23 @@
+---
+import ServiceItem from './ServiceItem.astro';
+
+interface Props {
+    title: string;
+    services: [];
+}
+
+const { services, title } = Astro.props;
+---
+
+<section class="block-section">
+	<div class="main-row-normal">
+		<h3 class="block-section__title">{ title }</h3>
+		<ul class="grid__list">
+			{ 
+                services && services.length > 0
+                ? services.map(( service, index ) => ( <ServiceItem service={ service } index={`0.${ index * 4 + 0.2 }`} /> ))
+                : "No Service Found"
+            }
+		</ul>
+	</div>
+</section>

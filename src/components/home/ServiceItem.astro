@@ -1,0 +1,76 @@
+---
+import Icon from "../ui/Icon.astro";
+const { service } = Astro.props;
+const { color, icon, name, shortDescription, slug } = service.attributes;
+---
+
+<li class="grid__item">
+    <h2 class="title">
+        <a href={ `/servicios/${ slug }` }>{ name }</a>
+    </h2>
+    <a href={ `/servicios/${ slug }` } class="icon">
+        <Icon width='48px' height='48px' name={ icon } />
+        <span style={`background-color: #${ color };`}></span>
+    </a>
+    <p>{ shortDescription }</p>
+    <a href={ `/servicios/${ slug }` } class="small-button">
+        <span class="small-button__label">Conoce más</span>
+        <span class="small-button__icon">
+            <Icon width='10px' viewBox="0 0 16 16" height='10px' name="arrow" />
+        </span>
+    </a>
+</li>
+
+<style>
+    p{
+        margin: 10px 0;
+        position: relative;
+        z-index: 2;
+    }
+
+    .title {
+        color: var(--dark);
+        font-size: 1.125em;
+        font-weight: bold;
+        margin-bottom: 16px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .icon {
+        align-items: center;
+        display: flex;
+        height: 80px;
+        justify-content: center;
+        position: relative;
+        width: 80px;
+        z-index: 1;
+    }
+
+    .icon span {
+        background-color: var(--gray);
+        border-radius: 40px;
+        left: 0;
+        height: 100%;
+        opacity: 0.4;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .icon svg {
+        position: relative;
+        z-index: 2;
+    }
+
+    . p {
+        font-size: 14px;
+        line-height: 1.5em;
+        margin: 16px 0 24px;
+    }
+
+    .:hover .icon span{
+        transform: scale(1.3);
+    }
+</style>

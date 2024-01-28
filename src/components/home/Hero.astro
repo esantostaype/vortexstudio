@@ -1,0 +1,160 @@
+---
+const { hero } = Astro.props;
+const { titleLine1, titleLine2, titleLine3, subtitle, video, videoPoster } = hero;
+const heroVideo = video.data.attributes.url;
+const heroVideoPoster = videoPoster.data.attributes.url;
+import IsoBg from "../ui/IsoBg.astro";
+import IsoStroke from "../ui/IsoStroke.astro";
+import { MainButton } from "../../components";
+---
+<section>
+	<div class="content main-row">
+		<div class="caption" data-scroll data-scroll-speed="3">
+			<div class="titles">
+				<h1 class="title">
+                    <span class="highlight animate-fade-right animate-duration-1000 animate-ease-in-out animate-fill-both">{ titleLine1 }</span><br>
+                    <span class="animate-fade-right animate-duration-1000 animate-delay-100 animate-ease-in-out animate-fill-both">{ titleLine2 }</span><br>
+                    <span class="animate-fade-right animate-duration-1000 animate-delay-200 animate-ease-in-out animate-fill-both">{ titleLine3 }</span>
+                </h1>
+				<h2 class="animate-fade-right animate-duration-1000 animate-delay-300 animate-ease-in-out animate-fill-both">{ subtitle }</h2>
+			</div>
+            <div class="animate-fade-right animate-duration-1000 animate-delay-[400ms] animate-ease-in-out animate-fill-both">
+                <MainButton hashTo="contact" label="Comienza Ahora" client:load/>
+            </div>
+		</div>
+	</div>
+	<div class="image">
+		<div class="video animate-fade animate-duration-2000 animate-delay-[400ms] animate-ease-in-out animate-fill-both" data-scroll data-scroll-speed="1">
+			<div class="video__mask">
+                <IsoBg />
+			</div>
+			<video autoplay muted loop poster={ heroVideoPoster }>
+				<source src={ heroVideo } />
+			</video>
+		</div>
+        <div class="animate-fade animate-duration-2000 animate-delay-[600ms] animate-ease-in-out animate-fill-both">
+            <IsoStroke />
+        </div>
+	</div>
+</section>
+
+<style>
+    section {
+        background: var(--dark);
+        color: #fff;
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
+        z-index: 2;
+    }
+
+    .content {
+        align-items: center;
+        display: flex;
+        height: 100vh;
+        position: relative;
+        z-index: 3;
+    }
+
+    .caption {
+        max-width: 60%;
+    }
+
+    .titles {
+        font-size: 4.25em;
+        font-weight: 300;
+        line-height: 1em;
+        margin-bottom: 60px;
+    }
+
+    .title {
+        font-size: 1.66em;
+        font-weight: bold;
+        line-height: 0.9em;
+        margin-bottom: 10px;
+    }
+
+    .title span {
+        display: inline-block;
+    }
+
+    .title span.highlight {
+        border-radius: 0.25rem;
+        background: var(--redGradient);
+        color: #000;
+        line-height: 0.8em;
+        mix-blend-mode: lighten;
+        padding: 6px 8px;
+    }
+
+    .image {
+        height: 80vh;
+        position: absolute;
+        right: 10vh;
+        top: 10vh;
+        width: 60%;
+    }
+
+    .video {
+        height: 100%;
+        mix-blend-mode: lighten;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .video video {
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.6;
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .video__mask {
+        height: 100.1%;
+        position: absolute;
+        width: 100%;
+        z-index: 2;
+    }
+
+    .video__mask svg {
+        height: 100%;
+        left: 50%;
+        position: absolute;
+        top: 0;
+        transform: translateX(-50%);
+        width: auto;
+    }
+
+    .image:before {
+        background: var(--purpleGradient);
+        border-radius: 1000px;
+        bottom: -50%;
+        content: '';
+        display: block;
+        filter: blur(40vh);
+        height: 100vh;
+        opacity: 0.4;
+        right: -20vh;
+        width: 100vh;
+        position: absolute;
+    }
+
+    .image:after {
+        background: var(--blueGradient);
+        border-radius: 1000px;
+        content: '';
+        display: block;
+        filter: blur(40vh);
+        height: 100vh;
+        opacity: 0.4;
+        right: -20vh;
+        width: 100vh;
+        top: -50%;
+        position: absolute;
+    }
+</style>

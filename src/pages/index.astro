@@ -1,172 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-export const getHome = async () => {
-    const home = await fetch( "https://vortex-strapi-production.up.railway.app/api/home?populate[0]=hero&populate[hero][populate][0]=video&populate[hero][populate][1]=videoPoster&populate[0]=about&populate[about][populate][0]=image" );
-    const { data } = await home.json();
-    return data;
-}
-
-export const getServices = async () => {
-    const services = await fetch( "https://vortex-strapi-production.up.railway.app/api/services" );
-    const { data } = await services.json();
-    return data;
-}
-const dataServices = await getServices();
-
-console.log("Dataservices GAAAAAAAAAAAA:", dataServices)
+import Hero from '../components/home/Hero.astro';
+import About from '../components/home/About.astro';
+import Services from '../components/home/Services.astro';
+import Projects from '../components/home/Projects.astro';
+import Contact from '../components/home/Contact.astro';
+import { getHome, getProjects, getServices } from '../services/vortex';
 
 const dataHome = await getHome();
+const services = await getServices();
+const projects = await getProjects();
+const about = dataHome.attributes.about;
 const hero = dataHome.attributes.hero;
-const { titleLine1, titleLine2, titleLine3, subtitle, video, videoPoster } = hero;
-const heroVideo = video.data.attributes.url;
-const heroVideoPoster = videoPoster.data.attributes.url;
 ---
 
-<Layout title="Vortex Studio" isHome>
-	<section>
-		<div class="content main-row">
-			<div class="caption">
-				<div class="titles">
-					<h1 class="title">
-						<span class="highlight">{ titleLine1 }</span><br>
-						<span>{ titleLine2 }</span><br>
-						<span>{ titleLine3 }</span>
-					</h1>
-					<h2>{ subtitle }</h2>
-				</div>
-			</div>
-		</div>
-	</section>
-	<section class="block-section">
-		<div class="main-row-normal">
-			<div class="grid__list">
-				{
-					dataServices.map(( service: any, index: number ) => (
-						<h2><a href={`/servicios/${service.attributes.slug}`}>{ service.attributes.name }</a></h2>
-					))
-				}
-			</div>
-		</div>
-	</section>
+<Layout title="Vortex Studio" isHome >
+	<Hero hero={ hero } />
+	<About about={ about } />
+	<Services services={ services } title="¿Qué tienes en mente?" />
+	<Projects projects={ projects } title="Lo que hacemos" />
+	<Contact />
 </Layout>
 
 <style>
-    section {
-        background: var(--dark);
-        color: #fff;
-        height: 100vh;
-        overflow: hidden;
-        position: relative;
-        z-index: 2;
-    }
-
-    .content {
-        align-items: center;
-        display: flex;
-        height: 100vh;
-        position: relative;
-        z-index: 3;
-    }
-
-    .caption {
-        max-width: 60%;
-    }
-
-    .titles {
-        font-size: 4.25em;
-        font-weight: 300;
-        line-height: 1em;
-        margin-bottom: 60px;
-    }
-
-    .title {
-        font-size: 1.66em;
-        font-weight: bold;
-        line-height: 0.9em;
-        margin-bottom: 10px;
-    }
-
-    .title span {
-        display: inline-block;
-    }
-
-    .title span.highlight {
-        border-radius: 0.25rem;
-        background: var(--redGradient);
-        line-height: 0.8em;
-        mix-blend-mode: lighten;
-        padding: 6px 8px;
-    }
-
-    .image {
-        height: 80vh;
-        position: absolute;
-        right: 10vh;
-        top: 10vh;
-        width: 60%;
-    }
-
-    .video {
-        height: 100%;
-        mix-blend-mode: lighten;
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 100%;
-        z-index: 1;
-    }
-
-    .video video {
-        height: 100%;
-        object-fit: cover;
-        opacity: 0.6;
-        position: absolute;
-        width: 100%;
-        z-index: 1;
-    }
-
-    .video__mask {
-        height: 100.1%;
-        position: absolute;
-        width: 100%;
-        z-index: 2;
-    }
-
-    .video__mask svg {
-        height: 100%;
-        left: 50%;
-        position: absolute;
-        top: 0;
-        transform: translateX(-50%);
-        width: auto;
-    }
-
-    .image:before {
-        background: var(--purpleGradient);
-        border-radius: 1000px;
-        bottom: -50%;
-        content: '';
-        display: block;
-        filter: blur(40vh);
-        height: 100vh;
-        opacity: 0.4;
-        right: -20vh;
-        width: 100vh;
-        position: absolute;
-    }
-
-    .image:after {
-        background: var(--blueGradient);
-        border-radius: 1000px;
-        content: '';
-        display: block;
-        filter: blur(40vh);
-        height: 100vh;
-        opacity: 0.4;
-        right: -20vh;
-        width: 100vh;
-        top: -50%;
-        position: absolute;
-    }
 </style>

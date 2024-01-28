@@ -1,21 +1,6 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "baseUrl": "C:/Astro/vortex",
-    "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "@/components/*": [
-        "src/components/*"
-      ],
-      "@/layouts/*": [
-        "src/layouts/*"
-      ],
-      "@/services/*": [
-        "src/services/*"
-      ]
-    },
     "jsx": "react-jsx",
     "jsxImportSource": "react"
   }
