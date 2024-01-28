@@ -12,9 +12,14 @@ const services = await getServices();
 const projects = await getProjects();
 const about = dataHome.attributes.about;
 const hero = dataHome.attributes.hero;
+
+const { videoPoster } = hero;
+const heroVideoPoster = videoPoster.data.attributes.url;
+
+console.log('GAAAAAAAA', dataHome);
 ---
 
-<Layout title="Vortex Studio" isHome >
+<Layout title="Vortex Studio" isHome videoPoster={ heroVideoPoster } >
 	<Hero hero={ hero } />
 	<About about={ about } />
 	<Services services={ services } title="¿Qué tienes en mente?" />

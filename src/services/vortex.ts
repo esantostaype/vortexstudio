@@ -1,7 +1,7 @@
 import { API_URL } from '../config'
 
 export const getHome = async () => {
-    const home = await fetch( API_URL + "/api/home?populate[0]=hero&populate[hero][populate][0]=video&populate[hero][populate][1]=videoPoster&populate[0]=about&populate[about][populate][0]=image" );
+    const home = await fetch( API_URL + "/api/home?populate[hero][fields]=titleLine1,titleLine2,titleLine3,subtitle,video&populate[hero][populate][video][fields][0]=url&populate[hero][populate][videoPoster][fields][0]=url&populate[about][fields]=title,subtitle,content&populate[about][populate][image][fields][0]=url" );
     const { data } = await home.json();
     return data;
 }
