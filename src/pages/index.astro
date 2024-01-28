@@ -40,13 +40,13 @@ const heroVideoPoster = videoPoster.data.attributes.url;
 	</section>
 	<section class="block-section">
 		<div class="main-row-normal">
-			<ul class="grid__list">
+			<div class="grid__list">
 				{
 					dataServices.map(( service: any, index: number ) => (
 						<h2><a href={`/servicios/${service.attributes.slug}`}>{ service.attributes.name }</a></h2>
 					))
 				}
-			</ul>
+			</div>
 		</div>
 	</section>
 </Layout>
@@ -94,7 +94,6 @@ const heroVideoPoster = videoPoster.data.attributes.url;
     .title span.highlight {
         border-radius: 0.25rem;
         background: var(--redGradient);
-        color: #000;
         line-height: 0.8em;
         mix-blend-mode: lighten;
         padding: 6px 8px;
