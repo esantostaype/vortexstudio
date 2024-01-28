@@ -1,8 +1,8 @@
 ---
-import { Button } from '../../components';
-import Contact from '../../components/home/Contact.astro';
-import Projects from '../../components/home/Projects.astro';
-import { Process } from '../../components';
+// import { Button } from '../../components';
+// import Contact from '../../components/home/Contact.astro';
+// import Projects from '../../components/home/Projects.astro';
+// import { Process } from '../../components';
 import Layout from '../../layouts/Layout.astro';
 import { getProjects, getServices, getServiceBy } from '../../services/vortex'
 
@@ -38,32 +38,18 @@ export async function getStaticPaths() {
 
 const { service } = Astro.props;
 
-const serviceData: ServiceData = await getServiceBy( service.id );
-const { name, shortDescription, image } = serviceData.attributes;
+// const serviceData: ServiceData = await getServiceBy( service.id );
+// const { name, shortDescription, image } = serviceData.attributes;
 
-const projects = await getProjects();
+// const projects = await getProjects();
 ---
 
-<Layout title={ `${ name } - Vortex Studio` } >
+<Layout title={ `Vortex Studio` } >
     <section class="service-page" data-scroll-section>
-        <section class="service-page__main main-row">
-            <div class="main__caption">
-                <h1 class="title">
-                    <span class="animate-fade-right animate-duration-1000 animate-ease-in-out animate-fill-both">{ name }</span>
-                </h1>
-                <p class="animate-fade-right animate-duration-1000 animate-delay-200 animate-ease-in-out animate-fill-both">{ shortDescription }</p>
-                <div class="animate-fade-right animate-duration-1000 animate-delay-300 animate-ease-in-out animate-fill-both">
-                    <Button size='main' hashTo="contact" label="Cotiza nuestro Servicio" client:load/>
-                </div>
-            </div>
-            <div class="main__image animate-fade-up animate-duration-1000 animate-delay-300 animate-ease-in-out animate-fill-both">
-                <img src={ image.data.attributes.url } alt={ name }>
-            </div>
-        </section>
-        <Process client:visible/>
+        test
     </section>
-	<Projects projects={ projects } title="Últimos proyectos" />
-	<Contact />
+	<!-- <Projects projects={ projects } title="Últimos proyectos" />
+	<Contact /> -->
 </Layout>
 
 <style>
