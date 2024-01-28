@@ -2,7 +2,7 @@
 import { Button } from '../../components';
 import Contact from '../../components/home/Contact.astro';
 import Projects from '../../components/home/Projects.astro';
-// import { Process } from '../../components';
+import { Process } from '../../components';
 import Layout from '../../layouts/Layout.astro';
 import { getProjects, getServices, getServiceBy } from '../../services/vortex'
 
@@ -60,7 +60,7 @@ const projects = await getProjects();
                 <img src={ image.data.attributes.url } alt={ name }>
             </div>
         </section>
-        <!-- <Process client:visible/> -->
+        <Process client:visible/>
     </section>
 	<Projects projects={ projects } title="Últimos proyectos" />
 	<Contact />
