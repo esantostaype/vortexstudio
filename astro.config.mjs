@@ -1,10 +1,10 @@
 import { defineConfig } from 'astro/config';
 import rehypeExternalLinks from 'rehype-external-links';
-
+import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
 
 export default defineConfig({
-	integrations: [react()],
+	integrations: [tailwind(), react()],
 	markdown: {
 		rehypePlugins: [
 			[
@@ -15,4 +15,11 @@ export default defineConfig({
 			],
 		]
 	},
+	i18n: {
+		defaultLocale: 'es',
+		locales: ['es', 'en'],
+		routing: {
+			prefixDefaultLocale: false
+		}
+	}
 });
