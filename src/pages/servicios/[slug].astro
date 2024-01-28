@@ -25,6 +25,27 @@ interface ServiceData {
                 }
             }
         };
+        processTitle: string;
+        process: [
+            {
+                title: string;
+                description: string;
+                icon: {
+                    data: {
+                        attributes: {
+                            url: string;
+                        };
+                    };
+                };
+                image: {
+                    data: {
+                        attributes: {
+                            url: string;
+                        };
+                    };
+                };
+            }
+        ];
     };
 }
 
@@ -39,7 +60,7 @@ export async function getStaticPaths() {
 const { service } = Astro.props;
 
 const serviceData: ServiceData = await getServiceBy( service.id );
-const { name, shortDescription, image } = serviceData.attributes;
+const { name, shortDescription, image, processTitle, process } = serviceData.attributes;
 const serviceImage = image.data.attributes.url;
 
 const projects = await getProjects();
@@ -61,7 +82,7 @@ const projects = await getProjects();
                 <img src={ serviceImage } alt={ name }>
             </div>
         </section>
-        <Process client:visible/>
+        <Process processTitle={ processTitle } process={ process } client:visible/>
     </section>
 	<Projects projects={ projects } title="Últimos proyectos" />
 	<Contact />

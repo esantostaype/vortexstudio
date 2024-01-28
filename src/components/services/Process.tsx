@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperObject } from 'swiper';
 import { FreeMode, Thumbs, EffectFade } from 'swiper/modules';
@@ -9,47 +9,31 @@ import 'swiper/css/thumbs';
 import 'swiper/css/effect-fade';
 import styles from './Process.module.css';
 
-interface ItemProcess {
-    title: string;
-    content: string;
-    image: string;
-}
-
-interface Props {
-    process: ItemProcess[];
-}
-
-export const processData: Props = {
+interface ProcessProps {
+    processTitle: string;
     process: [
         {
-            title: "Análisis y Planificación",
-            content: "En esta etapa inicial, nos sumergimos en tus objetivos comerciales y requisitos específicos para definir la estructura del sitio web. Realizamos un análisis de la competencia para identificar oportunidades y establecer la arquitectura que brindará una experiencia de usuario coherente.",
-            image: "/images/service1.jpg"
-        },
-        {
-            title: "Diseño UI/UX",
-            content: "En esta etapa inicial, nos sumergimos en tus objetivos comerciales y requisitos específicos para definir la estructura del sitio web. Realizamos un análisis de la competencia para identificar oportunidades y establecer la arquitectura que brindará una experiencia de usuario coherente.",
-            image: "/images/service2.jpg"
-        },
-        {
-            title: "Desarrollo Técnico",
-            content: "En esta etapa inicial, nos sumergimos en tus objetivos comerciales y requisitos específicos para definir la estructura del sitio web. Realizamos un análisis de la competencia para identificar oportunidades y establecer la arquitectura que brindará una experiencia de usuario coherente.",
-            image: "/images/service1.jpg"
-        },
-        {
-            title: "Contenido y Pruebas",
-            content: "En esta etapa inicial, nos sumergimos en tus objetivos comerciales y requisitos específicos para definir la estructura del sitio web. Realizamos un análisis de la competencia para identificar oportunidades y establecer la arquitectura que brindará una experiencia de usuario coherente.",
-            image: "/images/service2.jpg"
-        },
-        {
-            title: "Lanzamiento y Mantenimiento",
-            content: "En esta etapa inicial, nos sumergimos en tus objetivos comerciales y requisitos específicos para definir la estructura del sitio web. Realizamos un análisis de la competencia para identificar oportunidades y establecer la arquitectura que brindará una experiencia de usuario coherente.",
-            image: "/images/service1.jpg"
+            title: string;
+            description: string;
+            icon: {
+                data: {
+                    attributes: {
+                        url: string;
+                    };
+                };
+            };
+            image: {
+                data: {
+                    attributes: {
+                        url: string;
+                    };
+                };
+            };
         }
-    ]
+    ];
 }
 
-export const Process = () => {
+export const Process: React.FC<ProcessProps> = ({ processTitle, process }) => {
 
     const [ processList, setProcessList ] = useState<SwiperObject>();
     
@@ -58,7 +42,7 @@ export const Process = () => {
             <div className="main">
                 <div className={ styles.list }>
                     <span>El proceso</span>
-                    <h2 className={ styles.title }>Desde el Análisis Estratégico hasta la Excelencia Digital</h2>                    
+                    <h2 className={ styles.title }>{ processTitle }</h2>                    
                     <Swiper
                         onSwiper={ setProcessList }
                         spaceBetween={ 10 }
@@ -66,7 +50,7 @@ export const Process = () => {
                         modules={[ Thumbs ]}
                     >
                         {
-                            processData.process.map( ( itemProcess, index ) => {
+                            process.map( ( itemProcess, index ) => {
                                 return (
                                     <SwiperSlide key={ index }>
                                         { index + 1 }. { itemProcess.title }
@@ -87,22 +71,36 @@ export const Process = () => {
                     fadeEffect={{ crossFade: true }}
                 >
                     {
-                        processData.process.map( ( itemProcess, index ) => {
+                        process.map( ( itemProcess, index ) => {
                             return (
                                 <SwiperSlide key={ index }>
                                     <div className="caption">
                                         <div className={ styles.caption__wrapper }>
                                             <div className={ styles.caption__icon }>
-                                                <img src="/images/icon-1.png"/>
+                                                {
+                                                    itemProcess.icon &&
+                                                    itemProcess.icon.data &&
+                                                    itemProcess.icon.data.attributes &&
+                                                    itemProcess.icon.data.attributes.url
+                                                    ? ( <img src={ itemProcess.icon.data.attributes.url } alt={ itemProcess.title } /> )
+                                                    : ( <img src="/images/proceso-icono-defecto.webp" alt="Ícono por defecto de Proceso" /> )
+                                                }
                                             </div>
                                             <div className={ styles.caption__content }>
                                                 <h2 className={ styles.caption__title }>{ itemProcess.title }</h2>
-                                                <p>{ itemProcess.content }</p>
+                                                <p>{ itemProcess.description }</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div className={ styles.image }>
-                                        <img src={ itemProcess.image }/>
+                                        {
+                                            itemProcess.image &&
+                                            itemProcess.image.data &&
+                                            itemProcess.image.data.attributes &&
+                                            itemProcess.image.data.attributes.url
+                                            ? ( <img src={ itemProcess.image.data.attributes.url } alt={ itemProcess.title } /> )
+                                            : ( <img src="/images/imagen-proceso-defecto.webp" alt="Imagen por defecto de Proceso" /> )
+                                        }
                                     </div>
                                 </SwiperSlide>
                             )
