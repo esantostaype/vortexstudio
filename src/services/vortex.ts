@@ -7,13 +7,13 @@ export const getHome = async () => {
 }
 
 export const getServices = async () => {
-    const services = await fetch( API_URL + "/api/services?populate[image][fields][0]=url&populate[icon][fields][0]=url&populate[process][fields]" );
+    const services = await fetch( API_URL + "/api/services?[fields]=name&[fields]=slug&[fields]=shortDescription&[fields]=color&populate[icon][fields][0]=url" );
     const { data } = await services.json();
     return data;
 }
 
 export const getServiceBy = async ( id: string ) => {
-    const service = await fetch( API_URL + `/api/services/${ id }` );
+    const service = await fetch( API_URL + `/api/services/${ id }?[fields]=name&[fields]=shortDescription&populate[image][fields][0]=url&populate[process][fields]=title,description&populate[process][populate][icon][fields][0]=url&&populate[process][populate][image][fields][0]=url` );
     const { data } = await service.json();
     return data;
 }

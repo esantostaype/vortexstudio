@@ -19,9 +19,12 @@ const { title, isHome } = Astro.props;
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/images/favicon/favicon.svg" />
-		<meta name="generator" content={ Astro.generator } />
 		<meta name="robots" content="noindex,nofollow">
+		<meta name="generator" content={ Astro.generator } />
 		<title>{title}</title>
+		<link rel="preload" href="/images/vortex-iso.svg" as="image" />
+		<link rel="preload" href="/images/vortex-studio.svg" as="image" />
+		<link rel="preload" href="/images/vortex-studio-light-bg.svg" as="image" />
 		<ViewTransitions />
 	</head>
 	<body class=`${ isHome && "isHome" }` data-scroll-container>		
