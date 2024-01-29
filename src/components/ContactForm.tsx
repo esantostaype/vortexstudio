@@ -1,7 +1,9 @@
 import { Formik, Form, type FormikHelpers } from 'formik';
 import * as Yup from 'yup';
-import { Button, TextField } from '../components';
+import { Button, TextField, Notification } from '../components';
 import { Arrow } from './ui/Icons';
+import { useState } from 'react';
+import { Spinner } from './ui/Spinner';
 
 interface FormData {
 	fullName: string,
@@ -28,6 +30,9 @@ const SignupSchema = Yup.object().shape({
 
 export const ContactForm = () => {
 
+    const [ loading, setLoading ] = useState( false );
+    const [ submitted, setSubmitted ] = useState( false );
+
     return (
         <Formik
 			initialValues={{
@@ -38,7 +43,8 @@ export const ContactForm = () => {
 			}}
 			validationSchema={ SignupSchema }
 			onSubmit={
-				async( values: FormData ) => {
+				async( values: FormData, { setSubmitting, resetForm } ) => {
+					setLoading( true );
 					await fetch(
 						`https://vortex-strapi-production.up.railway.app/api/contacts`,
 						{
@@ -56,11 +62,25 @@ export const ContactForm = () => {
 							method: 'POST'
 						}
 					);
+					setLoading( false );
+                    setSubmitted( true );
+					resetForm();
+					setSubmitting( false );
+					setTimeout(() => {
+						setSubmitted(false);
+					}, 5000);
 				}
 			}
 			>
-			{({ errors, touched, values }) => (
+			{({ errors, touched, values, isSubmitting }) => (
 				<Form className='form'>
+					<div className={ `submitting ${ loading && 'active' }` }>
+						<Spinner/>
+					</div>
+					{
+						submitted &&
+						<Notification type="success" message="Gracias por ponerte en contacto con nosotros, en unos instantes un agente se estará comunicando contigo :)" />
+					}
 					<div className='form__item__full'>
 						<TextField
 							label="Nombre Completo"
@@ -107,7 +127,7 @@ export const ContactForm = () => {
 						/>
 					</div>
 					<div className='form__item__full'>
-						<Button label='Enviar Información' size='main' />
+						<Button label='Enviar Información' size='main' disabled={ isSubmitting }/>
 					</div>
 				</Form>
 			)}

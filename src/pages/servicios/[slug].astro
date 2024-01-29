@@ -2,7 +2,7 @@
 import { Button } from '../../components';
 import Contact from '../../components/home/Contact.astro';
 import Projects from '../../components/home/Projects.astro';
-import { Process } from '../../components';
+import { Process, TypingText } from '../../components';
 import Layout from '../../layouts/Layout.astro';
 import { getProjects, getServices, getServiceBy } from '../../services/vortex'
 
@@ -72,6 +72,7 @@ const projects = await getProjects();
             <div class="main__caption">
                 <h1 class="title">
                     <span class="animate-fade-right animate-duration-1000 animate-ease-in-out animate-fill-both">{ name }</span>
+                    <span class="title__typing animate-fade-right animate-duration-1000 animate-delay-100 animate-ease-in-out animate-fill-both"><TypingText client:load/></span>
                 </h1>
                 <p class="animate-fade-right animate-duration-1000 animate-delay-200 animate-ease-in-out animate-fill-both">{ shortDescription }</p>
                 <div class="animate-fade-right animate-duration-1000 animate-delay-300 animate-ease-in-out animate-fill-both">

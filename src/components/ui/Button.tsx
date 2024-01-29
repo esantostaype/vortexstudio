@@ -2,6 +2,7 @@ import { type FC, useState } from 'react';
 import { Arrow } from './Icons';
 
 interface Props {
+    disabled?: boolean;
     isLink?: boolean;
     link?: string;
     hashTo?: string;

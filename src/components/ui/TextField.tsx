@@ -1,5 +1,5 @@
-import { useState, type FC, type ChangeEvent } from 'react';
-import { ErrorMessage, Field } from 'formik';
+import { useState, type FC, type ChangeEvent, useEffect } from 'react';
+import { ErrorMessage, Field, useFormikContext } from 'formik';
 import styles from './TextField.module.css';
 
 interface Select {
@@ -37,6 +37,11 @@ export const TextField:FC<Props> = ({
 
     const [ isActive, setIsActive ] = useState( false );
     const [ isFilled, setIsFilled ] = useState( false );
+    const { resetForm } = useFormikContext();
+
+    useEffect(() => {
+        setIsFilled( !!value );
+    }, [ value ]);
 
     const handleFieldFocus = () => {
         setIsActive(true);
