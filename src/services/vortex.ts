@@ -13,7 +13,7 @@ export const getServices = async () => {
 }
 
 export const getServiceBy = async ( id: string ) => {
-    const service = await fetch( API_URL + `/api/services/${ id }?[fields]=name&[fields]=slug&[fields]=shortDescription&[fields]=processTitle&populate[image][fields][0]=url&populate[process][fields]=title,description&populate[process][populate][icon][fields][0]=url&&populate[process][populate][image][fields][0]=url` );
+    const service = await fetch( API_URL + `/api/services/${ id }?[fields]=name&[fields]=slug&[fields]=shortDescription&[fields]=processTitle&populate[image][fields][0]=url&populate[process][fields]=title,description&populate[process][populate][icon][fields][0]=url&populate[process][populate][image][fields][0]=url&populate[adjectives][fields][0]=name` );
     const { data } = await service.json();
     return data;
 }
@@ -25,7 +25,7 @@ export const getProjects = async () => {
 }
 
 export const getProjectBy = async ( id: string ) => {
-    const service = await fetch( API_URL + `/api/projects/${ id }?[fields]=name&populate[categories][fields][0]=name&populate[technologies][fields][0]=name&populate[gallery][fields][0]=url` );
+    const service = await fetch( API_URL + `/api/projects/${ id }?[fields]=name&[fields]=description&populate[thumbnail][fields][0]=url&populate[services][fields][0]=name&populate[services][fields][1]=slug&populate[technologies][fields][0]=name&populate[technologies][populate][icon][fields][0]=url&populate[gallery][fields][0]=url` );
     const { data } = await service.json();
     return data;
 }

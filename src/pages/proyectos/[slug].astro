@@ -1,0 +1,243 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getProjectBy, getProjects } from '../../services/vortex'
+import Contact from '../../components/home/Contact.astro';
+
+interface Project {
+    id: string;
+    attributes: {
+        name: string;
+        slug: string;
+    };
+}
+
+interface ProjectsData {
+    id: string;
+    attributes: {
+        name: string;
+        description: string;
+        thumbnail: {
+            data: {
+                attributes: {
+                    url: string;
+                }
+            }
+        };
+        services: {
+            data: [
+                {
+                    attributes: {
+                        name: string;
+                        slug: string;
+                    }
+                }
+            ]
+        };
+        technologies: {
+            data: [
+                {
+                    attributes: {
+                        name: string;
+                        icon: {
+                            data: {
+                                attributes: {
+                                    url: string;
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        };
+        gallery: {
+            data: [
+                {
+                    attributes: {
+                        url: string;
+                    }
+                }
+            ]
+        };
+    };
+}
+
+export async function getStaticPaths() {
+    const projects: Project[] = await getProjects();
+    return projects.map(( project ) => ({
+        params: { slug: project.attributes.slug },
+        props: { project }
+    }) )
+}
+
+const { project } = Astro.props;
+
+const projectsData: ProjectsData = await getProjectBy( project.id );
+const { name, description, thumbnail, gallery, services, technologies } = projectsData.attributes;
+
+---
+
+<Layout title={ `${ name } – Vortex Studio` } description={ description }>
+    <section data-scroll-section>
+        <section class="content main-row">
+            <div class="header">
+                <h1 class="title">{ name }</h1>
+                <div class="info">
+                    <ul class="categories">
+                        {
+                            services.data.map(( service ) => (
+                                <li><a href={ service.attributes.slug }>{ service.attributes.name }</a></li>
+                            ))
+                        }
+                    </ul>
+                    <ul class="tech">
+                        {
+                            technologies.data.map(( tech ) => (
+                                <li><img src={ tech.attributes.icon.data.attributes.url  }/></li>
+                            ))
+                        }
+                    </ul>
+                </div>
+            </div>
+            <ul class="gallery">
+                <li><img src={ thumbnail.data.attributes.url  } transition:name={ `image ${ name }` }/></li>
+                {
+                    gallery.data.map(( image ) => (
+                        <li><img src={ image.attributes.url  }/></li>
+                    ))
+                }
+            </ul>
+        </section>
+    </section>
+    <div class="bg"></div>
+    <Contact />
+</Layout>
+
+<style>
+    .bg{
+        background-color: var(--dark);
+        height: 100vh;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 0;
+    }
+
+    .bg::before {
+        background: var(--purpleGradient);
+        border-radius: 1000px;
+        bottom: -50%;
+        content: '';
+        display: block;
+        filter: blur(40vh);
+        height: 100vh;
+        opacity: 0.4;
+        right: -20vh;
+        width: 100vh;
+        position: absolute;
+    }
+
+    .bg::after {
+        background: var(--blueGradient);
+        border-radius: 1000px;
+        content: '';
+        display: block;
+        filter: blur(40vh);
+        height: 100vh;
+        opacity: 0.4;
+        right: -20vh;
+        width: 100vh;
+        top: -50%;
+        position: absolute;
+    }
+
+    .content {
+        color: #fff;
+        position: relative;
+        z-index: 999999;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        padding: 30px 0;
+        position: sticky;
+        z-index: 3;
+    }
+
+    .title {
+        font-weight: bold;
+        font-size: 3em;
+        line-height: 1em;
+    }
+
+    .info{
+        align-items: center;
+        display: flex;
+        gap: 20px;
+    }
+
+    .categories{
+        align-items: center;
+        display: flex;
+        font-size: 12px;
+        line-height: 1.2em;
+        gap: 4px;
+        text-transform: uppercase;
+    }
+
+    .categories a{
+        border: 1px solid var(--lightgray2);
+        border-radius: 4px;
+        display: block;
+        padding: 8px 12px;
+    }
+
+    .categories a:hover{
+        border: 1px solid var(--purple);
+        color: var(--purple);
+    }
+
+    .tech {
+        align-items: flex-start;
+        display: flex;
+    }
+
+    .tech li {
+        margin-left: 10px;
+    }
+
+    .tech img {
+        width: 24px;
+    }
+
+    .close {
+        align-items: center;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        display: flex;
+        height: 32px;
+        justify-content: center;
+        position: fixed;
+        right: 30px;
+        top: 24px;
+        transition: all 0.3s ease;
+        width: 32px;
+        z-index: 99;
+    }
+
+    .close:hover {
+        transform: scale(1.1);
+    }
+
+    .close:active {
+        transform: scale(0.97);
+    }
+
+    .gallery{
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+        z-index: 2;
+    }
+</style>

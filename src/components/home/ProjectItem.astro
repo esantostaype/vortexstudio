@@ -5,10 +5,10 @@ const { project } = Astro.props;
 const { name, slug, thumbnail } = project.attributes;
 const previewImage = thumbnail.data.attributes.url;
 ---
-<li transition:name=`image${name}`>
-    <div class="portfolio__image">
-        <Image src={ previewImage } width={ 720 } height={ 648 } alt={ name }/>
-    </div>
+<li>
+    <a class="portfolio__image" href={ `/proyectos/${ slug }` }>
+        <Image src={ previewImage } width={ 720 } height={ 648 } alt={ name } transition:name=`image ${ name }`/>
+    </a>
 </li>
 
 <style>

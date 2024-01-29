@@ -1,9 +1,9 @@
 ---
-import { Button } from '../../components';
+import Layout from '../../layouts/Layout.astro';
+import { Button, TypingText } from '../../components';
 import Contact from '../../components/home/Contact.astro';
 import Projects from '../../components/home/Projects.astro';
-import { Process, TypingText } from '../../components';
-import Layout from '../../layouts/Layout.astro';
+import { Process } from '../../components';
 import { getProjects, getServices, getServiceBy } from '../../services/vortex'
 
 interface Service {
@@ -14,7 +14,7 @@ interface Service {
     };
 }
 
-interface ServiceData {
+interface ServicesData {
     attributes: {
         name: string;
         shortDescription: string;
@@ -46,6 +46,11 @@ interface ServiceData {
                 };
             }
         ];
+        adjectives: [
+            {
+                name: string;
+            }
+        ];
     };
 }
 
@@ -59,20 +64,22 @@ export async function getStaticPaths() {
 
 const { service } = Astro.props;
 
-const serviceData: ServiceData = await getServiceBy( service.id );
-const { name, shortDescription, image, processTitle, process } = serviceData.attributes;
+const servicesData: ServicesData = await getServiceBy( service.id );
+const { name, adjectives, shortDescription, image, processTitle, process } = servicesData.attributes;
 const serviceImage = image.data.attributes.url;
 
 const projects = await getProjects();
 ---
 
-<Layout title={ `${ name } - Vortex Studio` } >
+<Layout title={ `${ name } - Vortex Studio` } description={ shortDescription }>
     <section class="service-page" data-scroll-section>
         <section class="service-page__main main-row">
             <div class="main__caption">
                 <h1 class="title">
                     <span class="animate-fade-right animate-duration-1000 animate-ease-in-out animate-fill-both">{ name }</span>
-                    <span class="title__typing animate-fade-right animate-duration-1000 animate-delay-100 animate-ease-in-out animate-fill-both"><TypingText client:load/></span>
+                    <span class="title__typing animate-fade-right animate-duration-1000 animate-delay-100 animate-ease-in-out animate-fill-both">
+                        <TypingText client:load array={ adjectives } />
+                    </span>
                 </h1>
                 <p class="animate-fade-right animate-duration-1000 animate-delay-200 animate-ease-in-out animate-fill-both">{ shortDescription }</p>
                 <div class="animate-fade-right animate-duration-1000 animate-delay-300 animate-ease-in-out animate-fill-both">
