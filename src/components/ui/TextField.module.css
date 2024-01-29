@@ -37,6 +37,7 @@
 
 .isError .field{
     border: 2px solid var(--error);
+    color: var(--error);
 }
 
 .isError .label{
@@ -45,6 +46,7 @@
 
 .isError .field:focus-visible{
     outline: var(--error) auto 1px;
+    color: var(--error);
     transition: all 0s ease;
 }
 
@@ -58,4 +60,8 @@
     position: absolute;
     text-align: left;
     width: 100%;
+}
+
+.isError .field option{
+    color: var(--gray);
 }

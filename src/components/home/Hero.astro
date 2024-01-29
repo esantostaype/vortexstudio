@@ -157,4 +157,69 @@ import { Button } from "../../components";
         top: -50%;
         position: absolute;
     }
+
+    @media screen and (max-width: 1600px) {
+
+        .titles {
+            font-size: 4em;
+        }
+
+        .image {
+            height: 75vh;
+            top: 12.5vh;
+            width: 50%;
+        }
+    }
+
+    @media screen and (max-width: 1280px) {
+		.titles {
+			font-size: 3.4em;
+		}
+
+		.image {
+			height: 75vh;
+			right: 0;
+			top: 12.5vh;
+			width: 65%;
+		}
+	}
+
+    @media screen and (max-width: 1023px) {
+
+        .content {
+            align-items: flex-end;
+            padding-bottom: 40px;
+        }
+
+        .caption {
+            max-width: 100%;
+        }
+
+        .titles {
+            font-size: 3em;
+        }
+
+        .title {
+            line-height: 1em;
+        }
+
+        .image {
+            height: 50vh;
+            right: 0;
+            top: 136px;
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+
+        .titles {
+			font-size: 2em;
+			line-height: 1.2em;
+		}
+
+        .image {
+            top: 94px;
+        }
+    }
 </style>

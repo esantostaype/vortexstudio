@@ -374,4 +374,57 @@ import Reset from "./Reset.astro"
 		visibility: visible;
 	}
 
+	@media screen and (max-width: 1600px) {
+
+		body {
+			font-size: 14px;
+		}
+
+		.main-row {
+			max-width: 1260px;
+		}
+	}
+
+	@media screen and (max-width: 1280px) {
+		.main-row,
+		.main-row-normal{
+			padding-left: 60px;
+			padding-right: 60px;
+		}
+		.block-section {
+			padding: 80px 0;
+		}
+	}
+
+	@media screen and (max-width: 1023px) {
+		.grid__list {
+			grid-gap: 60px;
+		}
+	}
+
+	@media screen and (max-width: 767px) {
+
+		.main-row,
+		.main-row-normal {
+			padding-left: 30px;
+			padding-right: 30px;
+		}
+
+		.block-section {
+			padding: 40px 0;
+		}
+
+		.block-section__title {
+			font-size: 2em;
+			line-height: 1.2em;
+			margin-bottom: 1em;
+			text-align: left;
+		}
+
+		.form__item{
+			flex: calc( 100% - 20px );
+		}
+
+	}
+
 </style>
