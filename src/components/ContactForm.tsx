@@ -79,7 +79,7 @@ export const ContactForm = () => {
 					</div>
 					{
 						submitted &&
-						<Notification type="success" message="Gracias por ponerte en contacto con nosotros, en unos instantes un agente se estará comunicando contigo :)" />
+						<Notification type="success" message="¡Gracias por ponerte en contacto con nosotros! Pronto nos comunicaremos contigo para proporcionarte la información que necesitas." />
 					}
 					<div className='form__item__full'>
 						<TextField
@@ -95,7 +95,7 @@ export const ContactForm = () => {
 					<div className='form__item'>
 						<TextField
 							label="Teléfono"
-							type="text"
+							type="tel"
 							name="phone"
 							placeholder="Ingresa tu Teléfono"
 							errors={ errors.phone }
@@ -106,7 +106,7 @@ export const ContactForm = () => {
 					<div className='form__item'>
 						<TextField
 							label="Email"
-							type="text"
+							type="email"
 							name="email"
 							placeholder="Ingresa tu Email"
 							errors={ errors.email }
@@ -118,7 +118,6 @@ export const ContactForm = () => {
 						<TextField
 							typeField="textarea"
 							label="Comentarios"
-							type="text"
 							name="comments"
 							placeholder="Ingresa tus Comentarios"
 							errors={ errors.comments }

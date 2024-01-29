@@ -1,5 +1,6 @@
 export * from './Header';
 export * from './ContactForm';
+export * from './QuoteForm';
 export * from './ui/TextField'
 export * from './ui/TypingText'
 export * from './ui/Button'
