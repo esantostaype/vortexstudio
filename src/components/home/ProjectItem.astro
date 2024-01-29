@@ -6,9 +6,9 @@ const { name, slug, thumbnail } = project.attributes;
 const previewImage = thumbnail.data.attributes.url;
 ---
 <li transition:name=`image${name}`>
-    <a class="portfolio__image" href={ `/proyectos/${ slug }` }>
+    <div class="portfolio__image">
         <Image src={ previewImage } width={ 720 } height={ 648 } alt={ name }/>
-    </a>
+    </div>
 </li>
 
 <style>
