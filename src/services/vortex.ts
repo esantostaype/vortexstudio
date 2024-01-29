@@ -25,7 +25,7 @@ export const getProjects = async () => {
 }
 
 export const getProjectBy = async ( id: string ) => {
-    const service = await fetch( API_URL + `/api/projects/${ id }?[fields]=name&[fields]=description&populate[thumbnail][fields][0]=url&populate[services][fields][0]=name&populate[services][fields][1]=slug&populate[technologies][fields][0]=name&populate[technologies][populate][icon][fields][0]=url&populate[gallery][fields][0]=url` );
+    const service = await fetch( API_URL + `/api/projects/${ id }?[fields]=name&[fields]=slug&[fields]=description&populate[thumbnail][fields][0]=url&populate[services][fields][0]=name&populate[services][fields][1]=slug&populate[technologies][fields][0]=name&populate[technologies][populate][icon][fields][0]=url&populate[gallery][fields][0]=url` );
     const { data } = await service.json();
     return data;
 }

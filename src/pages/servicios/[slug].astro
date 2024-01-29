@@ -75,7 +75,7 @@ const projects = await getProjects();
     <section class="service-page" data-scroll-section>
         <section class="service-page__main main-row">
             <div class="main__caption">
-                <h1 class="title">
+                <h1 class="title" transition:name={ `service ${ name }` }>
                     <span class="animate-fade-right animate-duration-1000 animate-ease-in-out animate-fill-both">{ name }</span>
                     <span class="title__typing animate-fade-right animate-duration-1000 animate-delay-100 animate-ease-in-out animate-fill-both">
                         <TypingText client:load array={ adjectives } />

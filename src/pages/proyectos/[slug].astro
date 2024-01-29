@@ -15,6 +15,7 @@ interface ProjectsData {
     id: string;
     attributes: {
         name: string;
+        slug: string;
         description: string;
         thumbnail: {
             data: {
@@ -72,7 +73,7 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 
 const projectsData: ProjectsData = await getProjectBy( project.id );
-const { name, description, thumbnail, gallery, services, technologies } = projectsData.attributes;
+const { name, description, slug, gallery, services, technologies } = projectsData.attributes;
 
 ---
 
@@ -99,11 +100,12 @@ const { name, description, thumbnail, gallery, services, technologies } = projec
                 </div>
             </div>
             <ul class="gallery">
-                <li><img src={ thumbnail.data.attributes.url  } transition:name={ `image ${ name }` }/></li>
                 {
-                    gallery.data.map(( image ) => (
-                        <li><img src={ image.attributes.url  }/></li>
-                    ))
+                    gallery.data.map(( image, index ) => (
+                        <li transition:name={ index === 0 ? `image${ slug }` : undefined }>
+                            <img src={image.attributes.url} />
+                        </li>
+                    ))  
                 }
             </ul>
         </section>
