@@ -86,7 +86,7 @@ const { name, description, slug, gallery, services, technologies } = projectsDat
                     <ul class="categories">
                         {
                             services.data.map(( service ) => (
-                                <li><a href={ service.attributes.slug }>{ service.attributes.name }</a></li>
+                                <li>{ service.attributes.name }</li>
                             ))
                         }
                     </ul>
@@ -188,16 +188,11 @@ const { name, description, slug, gallery, services, technologies } = projectsDat
         text-transform: uppercase;
     }
 
-    .categories a{
+    .categories li{
         border: 1px solid var(--lightgray2);
         border-radius: 4px;
         display: block;
         padding: 8px 12px;
-    }
-
-    .categories a:hover{
-        border: 1px solid var(--purple);
-        color: var(--purple);
     }
 
     .tech {
