@@ -15,8 +15,8 @@ export const Header = () => {
     }, []);
 
     return (
-        <header className="site-header">
-            <div className={`site-header__content ${ scrollTopData }`}>
+        <header className={`site-header ${ scrollTopData }`}>
+            <div className="site-header__content">
                 <a href="/" rel="home" className="logo">
                     <img src="/images/vortex-iso.svg" width="35" height="30" alt="Iso" className="iso" />
                     <img src="/images/vortex-studio.svg" width="166" height="30" alt="Vortex Studio" className="logo__label" />

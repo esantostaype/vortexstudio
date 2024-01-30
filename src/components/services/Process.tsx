@@ -39,7 +39,7 @@ export const Process: React.FC<ProcessProps> = ({ processTitle, process }) => {
     
     return (
         <section className="process animate-fade-up animate-duration-1000 animate-delay-300 animate-ease-in-out animate-fill-both">
-            <div className="main">
+            <div className="process__main">
                 <div className={ styles.list }>
                     <span>El proceso</span>
                     <h2 className={ styles.title }>{ processTitle }</h2>                    

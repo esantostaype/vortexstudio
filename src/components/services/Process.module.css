@@ -44,3 +44,26 @@
     height: 100%;
     object-fit: cover;
 }
+
+@media screen and (max-width: 1600px) {
+    .list {
+        max-width: 520px;
+    }
+    .image{
+        margin-left: 60px;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .list {
+        max-width: 100%;
+        padding: 0;
+    }
+    .image{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    
+}

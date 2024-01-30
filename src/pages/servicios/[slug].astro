@@ -158,4 +158,39 @@ const projects = await getProjects();
         50% { opacity: 0; }
         100% { opacity: 1; }
     }
+
+    @media screen and (max-width: 1023px) {
+        .service-page__main{
+            flex-direction: column;
+            gap: 20px;
+            padding-bottom: 40px;
+            padding-top: 40px;
+        }
+
+        .main__image{
+            width: 100%;
+        }
+
+        .main__image img{
+            width: 100%;
+        }
+
+        .title {
+            color: #000;
+            font-size: 3em;
+            width: 100%;
+        }
+
+        .main__caption p{
+            width: 100%;
+        }
+
+        .title span{
+            display: inline-block;
+        }
+        
+        .title__typing {
+            min-width: 200px;
+        }
+    }
 </style>
