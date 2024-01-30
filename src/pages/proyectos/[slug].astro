@@ -1,7 +1,8 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import LayoutPortfolio from '../../layouts/LayoutPortfolio.astro';
 import { getProjectBy, getProjects } from '../../services/vortex'
 import Contact from '../../components/home/Contact.astro';
+import { BackButton } from '../../components';
 
 interface Project {
     id: string;
@@ -77,7 +78,10 @@ const { name, description, slug, gallery, services, technologies } = projectsDat
 
 ---
 
-<Layout title={ `${ name } – Vortex Studio` } description={ description }>
+<LayoutPortfolio title={ `${ name } – Vortex Studio` } description={ description }>
+    <div class="projects__back-button">
+        <BackButton client:load/>
+    </div>
     <section data-scroll-section>
         <section class="content main-row">
             <div class="header">
@@ -112,7 +116,7 @@ const { name, description, slug, gallery, services, technologies } = projectsDat
     </section>
     <div class="bg"></div>
     <Contact />
-</Layout>
+</LayoutPortfolio>
 
 <style>
     .bg{
@@ -162,7 +166,7 @@ const { name, description, slug, gallery, services, technologies } = projectsDat
     .header {
         display: flex;
         justify-content: space-between;
-        padding: 30px 0;
+        padding: 20px 0;
         position: sticky;
         z-index: 3;
     }
@@ -238,6 +242,13 @@ const { name, description, slug, gallery, services, technologies } = projectsDat
         z-index: 2;
     }
 
+    .projects__back-button {
+        left: 20px;
+        position: fixed;
+        top: 20px;
+        z-index: 9999999999;
+    }
+
     @media screen and (max-width: 1280px) {
         .header {
             padding: 20px 30px;
@@ -250,11 +261,29 @@ const { name, description, slug, gallery, services, technologies } = projectsDat
         .gallery {
             border-radius: 0;
         }
+        .bg{
+            display: none;
+        }
+
+        .content {
+            color: inherit;
+        }
+        .title {
+            font-size: 2em;
+            line-height: 1em;
+            margin-left: 44px;
+        }
+        .projects__back-button {
+            top: 17px;
+        }
     }
 
     @media screen and (max-width: 767px) {
         .header {
             display: none;
+        }
+        .projects__back-button {
+            left: 17px;
         }
     }
 </style>

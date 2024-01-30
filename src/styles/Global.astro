@@ -458,6 +458,18 @@ import Reset from "./Reset.astro"
 			box-shadow: 0 0 40px rgba(0, 0, 0, 0.12);
 		}
 
+		.site-header__content {
+			padding: 6px 20px;
+		}
+
+		.isHome .site-header__content {
+			padding: 15px 20px;
+		}
+
+		.isHome .scrolled .site-header__content {
+			padding: 6px 20px;
+		}
+
 		.nav-button{
 			background: transparent;
 		}
@@ -536,7 +548,7 @@ import Reset from "./Reset.astro"
 		}
 
 		.main{
-			padding-top: 82px;
+			padding-top: 64px;
 		}
 
 		.isHome .main{
@@ -548,6 +560,7 @@ import Reset from "./Reset.astro"
 		}
 
 		.process__main{
+			display: block;
 			border-radius: 0;
 			padding: 60px;
 		}
