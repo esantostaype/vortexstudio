@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/home/Hero.astro';
+import About from '../../components/home/About.astro';
+import Services from '../../components/home/Services.astro';
+import Projects from '../../components/home/Projects.astro';
+import Contact from '../../components/home/Contact.astro';
+import { getHome, getProjects, getServices } from '../../services/vortex';
+
+const dataHome = await getHome();
+const services = await getServices();
+const projects = await getProjects();
+const about = dataHome.attributes.about;
+const hero = dataHome.attributes.hero;
+
+const { videoPoster } = hero;
+const heroVideoPoster = videoPoster.data.attributes.url;
+---
+
+<Layout
+	title="Digital Studio in Lima, Peru | Vortex Studio"
+	isHome
+	videoPoster={ heroVideoPoster }
+	description="We are Vortex Studio. We help you overcome the greatest challenges, aiming to reach your full potential. We are committed to you. We feel your brand as our own, turning your success into our primary achievement."
+>
+	<Hero hero={ hero } />
+	<About about={ about } />
+	<Services services={ services } title="What do you have in mind?" />
+	<Projects projects={ projects } title="What we do" />
+	<Contact />
+</Layout>
+
+<style>
+</style>

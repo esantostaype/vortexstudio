@@ -1,0 +1,193 @@
+---
+import Layout from '../../layouts/LayoutALP.astro';
+---
+
+<Layout>
+    <div class="hover-section" id="onClick">
+        <div id="hoverLivingRoom" class="hover-element hover-livingroom"></div>
+        <div id="hoverDiningRoom" class="hover-element hover-diningroom"></div>
+        <div id="hoverKitchen" class="hover-element hover-kitchen"></div>
+        <div id="hoverBedRooms" class="hover-element hover-bedrooms"></div>
+        <div id="hoverBathRooms" class="hover-element hover-bathrooms"></div>
+        <div id="hoverBedRoom1" class="hover-element hover-bedroom1"></div>
+    </div>
+    <div class="main-image" id="main">
+        <img src="../../../public/images/my-apartment/my-apartment.webp" class="main">
+        <img src="../../../public/images/my-apartment/livingroom.webp" id="livingRoom">
+        <img src="../../../public/images/my-apartment/diningroom.webp" id="diningRoom">
+        <img src="../../../public/images/my-apartment/kitchen.webp" id="kitchen">
+        <img src="../../../public/images/my-apartment/bedrooms.webp" id="bedRooms">
+        <img src="../../../public/images/my-apartment/bathrooms.webp" id="bathRooms">
+        <img src="../../../public/images/my-apartment/bedroom1.webp" id="bedRoom1">
+    </div>
+</Layout>
+
+<style>
+    .hover-section{
+        height: 100vh;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 999;
+    }
+
+    .hover-element{
+        position: absolute;
+    }
+
+    .hover-livingroom{
+        bottom: 22%;
+        right: 9%;
+        height: 24%;
+        width: 35%;
+    }
+
+    .hover-diningroom{
+        bottom: 44%;
+        right: 11%;
+        height: 18%;
+        width: 14%;
+    }
+
+    .hover-kitchen{
+        top: 16%;
+        right: 12%;
+        height: 22%;
+        width: 32%;
+    }
+
+    .hover-bedrooms{
+        top: 16%;
+        left: 11%;
+        height: 30%;
+        width: 16%;
+    }
+
+    .hover-bathrooms{
+        top: 16%;
+        left: 28%;
+        height: 20%;
+        width: 14%;
+    }
+
+    .hover-bedroom1{
+        bottom: 20%;
+        left: 10%;
+        height: 30%;
+        width: 42%;
+    }
+
+    .main-image img{
+        bottom: 0;
+        height: 100vh;
+        right: 0;
+        object-fit: cover;
+        opacity: 0;
+        position: absolute;
+        visibility: hidden;
+        transition: all 0.3s ease-in-out;
+        width: 100%;
+    }
+    .main-image img.active,
+    .main-image img.main{
+        opacity: 1;
+        visibility: visible;
+    }
+    .main-image.zoom img{
+        bottom: 44%;
+        height: 100vh;
+        right: 44%;
+        object-fit: cover;
+        position: absolute;
+        width: 100%;
+        transform: scale(2);
+    }
+    .main-image.zoom img{
+        display: none;
+    }
+    .main-image.zoom img.main{
+        display: block;
+    }
+</style>
+
+<script>
+    const onClick = document.getElementById('onClick');
+    const main = document.getElementById('main');
+
+    if ( onClick && main ) {
+        onClick.addEventListener('click', () => {
+            main.classList.toggle('zoom');
+        });
+    }
+
+
+
+
+    const hoverLivingRoom = document.getElementById('hoverLivingRoom');
+    const livingRoom = document.getElementById('livingRoom');
+
+    if ( hoverLivingRoom && livingRoom ) {
+        hoverLivingRoom.addEventListener('mouseenter', () => {
+            livingRoom.classList.add( 'active' );
+        });
+        hoverLivingRoom.addEventListener('mouseleave', () => {
+            livingRoom.classList.remove( 'active' );
+        });
+    }
+    const hoverDiningRoom = document.getElementById('hoverDiningRoom');
+    const diningRoom = document.getElementById('diningRoom');
+
+    if ( hoverDiningRoom && diningRoom ) {
+        hoverDiningRoom.addEventListener('mouseenter', () => {
+            diningRoom.classList.add( 'active' );
+        });
+        hoverDiningRoom.addEventListener('mouseleave', () => {
+            diningRoom.classList.remove( 'active' );
+        });
+    }
+    const hoverKitchen = document.getElementById('hoverKitchen');
+    const kitchen = document.getElementById('kitchen');
+
+    if ( hoverKitchen && kitchen ) {
+        hoverKitchen.addEventListener('mouseenter', () => {
+            kitchen.classList.add( 'active' );
+        });
+        hoverKitchen.addEventListener('mouseleave', () => {
+            kitchen.classList.remove( 'active' );
+        });
+    }
+    const hoverBedRooms = document.getElementById('hoverBedRooms');
+    const bedRooms = document.getElementById('bedRooms');
+
+    if ( hoverBedRooms && bedRooms ) {
+        hoverBedRooms.addEventListener('mouseenter', () => {
+            bedRooms.classList.add( 'active' );
+        });
+        hoverBedRooms.addEventListener('mouseleave', () => {
+            bedRooms.classList.remove( 'active' );
+        });
+    }
+    const hoverBathRooms = document.getElementById('hoverBathRooms');
+    const bathRooms = document.getElementById('bathRooms');
+
+    if ( hoverBathRooms && bathRooms ) {
+        hoverBathRooms.addEventListener('mouseenter', () => {
+            bathRooms.classList.add( 'active' );
+        });
+        hoverBathRooms.addEventListener('mouseleave', () => {
+            bathRooms.classList.remove( 'active' );
+        });
+    }
+    const hoverBedRoom1 = document.getElementById('hoverBedRoom1');
+    const bedRoom1 = document.getElementById('bedRoom1');
+
+    if ( hoverBedRoom1 && bedRoom1 ) {
+        hoverBedRoom1.addEventListener('mouseenter', () => {
+            bedRoom1.classList.add( 'active' );
+        });
+        hoverBedRoom1.addEventListener('mouseleave', () => {
+            bedRoom1.classList.remove( 'active' );
+        });
+    }
+</script>
