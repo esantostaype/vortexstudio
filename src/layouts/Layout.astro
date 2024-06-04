@@ -35,7 +35,7 @@ const {
 		<link rel="preload" href={ videoPoster } as="image" />
 		<ViewTransitions />
 	</head>
-	<body class=`${ isHome && "isHome" }` data-scroll-container>		
+	<body class=`${ isHome && "isHome" }` data-scroll-container>
 		<main class="main" data-scroll-section>
 			<Header client:load transition:name="header"/>
 			<slot />
@@ -43,5 +43,18 @@ const {
 		</main>
 	</body>
 </html>
+
+<!-- <script>
+	import LocomotiveScroll from 'locomotive-scroll';
+	document.addEventListener("astro:page-load", () => {
+		const container = document.querySelector("[data-scroll-container]");
+		if (container instanceof HTMLElement) {
+			const scroller = new LocomotiveScroll({
+				el: container,
+				smooth: true
+			});
+		}
+	});
+</script> -->
 
 <Global/>

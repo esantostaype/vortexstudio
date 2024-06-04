@@ -44,31 +44,6 @@ export const ContactForm = () => {
 			validationSchema={ SignupSchema }
 			onSubmit={
 				async( values: FormData, { setSubmitting, resetForm } ) => {
-					setLoading( true );
-					await fetch(
-						`https://vortex-strapi-production.up.railway.app/api/contacts`,
-						{
-							headers: {
-								'Content-Type': 'application/json',
-							},
-							body: JSON.stringify({
-								data: {
-									fullName: values.fullName,
-									phone: values.phone,
-									email: values.email,
-									comments: values.comments
-								}
-							}),
-							method: 'POST'
-						}
-					);
-					setLoading( false );
-                    setSubmitted( true );
-					resetForm();
-					setSubmitting( false );
-					setTimeout(() => {
-						setSubmitted(false);
-					}, 5000);
 				}
 			}
 			>

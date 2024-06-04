@@ -3,20 +3,20 @@ import { Image } from 'astro:assets';
 import Icon from "../ui/Icon.astro";
 import { Button } from "../../components";
 const { service } = Astro.props;
-const { color, icon, name, shortDescription, slug } = service.attributes;
-const iconService = icon.data.attributes.url;
+const { color, icon, name, description, slug } = service;
+console.log(service)
 ---
 
 <li class="grid__item">
-    <h2 class="title">
-        <a href={ `/servicios/${ slug }` }>{ name }</a>
-    </h2>
-    <a href={ `/servicios/${ slug }` } class="icon">
-        <Image src={ iconService } alt={ name } height="48" width="48" />
-        <span style={`background-color: #${ color };`}></span>
-    </a>
-    <p>{ shortDescription }</p>
-    <Button size='small' label='Conoce más' isLink link={ `/servicios/${ slug }` } />
+	<h2 class="title">
+		<a href={ `/servicios/${ slug }` }>{ name }</a>
+	</h2>
+	<a href={ `/servicios/${ slug }` } class="icon">
+		<Image src={ icon } alt={ name } height="48" width="48" />
+		<span style={`background-color: #${ color };`}></span>
+	</a>
+	<p>{ description }</p>
+	<Button size='small' label='Conoce más' isLink link={ `/servicios/${ slug }` } />
 </li>
 
 <style>

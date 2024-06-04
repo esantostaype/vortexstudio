@@ -1,8 +1,4 @@
 ---
-const { hero } = Astro.props;
-const { titleLine1, titleLine2, titleLine3, subtitle, video, videoPoster } = hero;
-const heroVideo = video.data.attributes.url;
-const heroVideoPoster = videoPoster.data.attributes.url;
 import IsoBg from "../ui/IsoBg.astro";
 import IsoStroke from "../ui/IsoStroke.astro";
 import { Button } from "../../components";
@@ -12,11 +8,11 @@ import { Button } from "../../components";
 		<div class="caption" data-scroll data-scroll-speed="3">
 			<div class="titles">
 				<h1 class="title">
-                    <span class="highlight animate-fade-right animate-duration-1000 animate-ease-in-out animate-fill-both">{ titleLine1 }</span><br>
-                    <span class="animate-fade-right animate-duration-1000 animate-delay-100 animate-ease-in-out animate-fill-both">{ titleLine2 }</span><br>
-                    <span class="animate-fade-right animate-duration-1000 animate-delay-200 animate-ease-in-out animate-fill-both">{ titleLine3 }</span>
+                    <span class="highlight animate-fade-right animate-duration-1000 animate-ease-in-out animate-fill-both">Potencia</span><br>
+                    <span class="animate-fade-right animate-duration-1000 animate-delay-100 animate-ease-in-out animate-fill-both">tu presencia</span><br>
+                    <span class="animate-fade-right animate-duration-1000 animate-delay-200 animate-ease-in-out animate-fill-both">en línea</span>
                 </h1>
-				<h2 class="animate-fade-right animate-duration-1000 animate-delay-300 animate-ease-in-out animate-fill-both">{ subtitle }</h2>
+				<h2 class="animate-fade-right animate-duration-1000 animate-delay-300 animate-ease-in-out animate-fill-both">y haz crecer tu marca.</h2>
 			</div>
             <div class="animate-fade-right animate-duration-1000 animate-delay-[400ms] animate-ease-in-out animate-fill-both">
                 <Button size="main" hashTo="contact" label="Comienza Ahora" client:load/>
@@ -28,8 +24,8 @@ import { Button } from "../../components";
 			<div class="video__mask">
                 <IsoBg />
 			</div>
-			<video autoplay muted loop poster={ heroVideoPoster }>
-				<source src={ heroVideo } />
+			<video autoplay muted loop poster="https://res.cloudinary.com/dq6txmetn/image/upload/v1706463995/vortex_video_poster_dc10f643bd.webp">
+				<source src="https://res.cloudinary.com/dq6txmetn/video/upload/v1706391685/vortex_video_02b79e633b.mp4" />
 			</video>
 		</div>
         <div class="animate-fade animate-duration-2000 animate-delay-[600ms] animate-ease-in-out animate-fill-both">

@@ -1,23 +1,27 @@
 ---
-import ServiceItem from './ServiceItem.astro';
+import { getServices } from "../../services/vortex";
+import ServiceItem from "./ServiceItem.astro";
+
+const services = await getServices();
 
 interface Props {
-    title: string;
-    services: [];
+  title: string;
 }
 
-const { services, title } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <section class="block-section">
-	<div class="main-row-normal">
-		<h3 class="block-section__title">{ title }</h3>
-		<ul class="grid__list">
-			{ 
-                services && services.length > 0
-                ? services.map(( service, index ) => ( <ServiceItem service={ service } index={`0.${ index * 4 + 0.2 }`} /> ))
-                : "No Service Found"
-            }
-		</ul>
-	</div>
+  <div class="main-row-normal">
+    <h3 class="block-section__title">{title}</h3>
+    <ul class="grid__list">
+      {
+        services && services.length > 0
+          ? services.map((service: any, index: number) => (
+              <ServiceItem service={service} index={`0.${index * 4 + 0.2}`} />
+            ))
+          : "No Service Found"
+      }
+    </ul>
+  </div>
 </section>

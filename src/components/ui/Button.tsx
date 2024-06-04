@@ -15,6 +15,7 @@ export const Button:FC<Props> = ({ hashTo, label, size, isLink, link }) => {
     const [ targetSection ] = useState(`#${hashTo}`);
 
     const scrollToSection = () => {
+        "use strict"
         const targetElement = document.querySelector( targetSection ) as HTMLElement;
         if ( targetElement ) {
             window.scrollTo({

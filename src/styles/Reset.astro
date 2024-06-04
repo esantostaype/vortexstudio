@@ -113,10 +113,37 @@
 
 	html {
 		overflow-x: hidden;
+		overscroll-behavior: none;
+	}
+
+	@media screen and (prefers-reduced-motion: no-preference) {
+		html {
+			scroll-behavior: smooth;
+		}
+	}
+
+	::-webkit-scrollbar {
+		width: 0;
+		border-radius: 10px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+		background-color: var(--dark);
+		background-clip: content-box;
+	}
+
+	::-webkit-scrollbar-track {
+		background: #f00;
+	}
+
+	::-webkit-scrollbar-corner {
+		background: #ff0;
 	}
 
 	html.fixed {
 		overflow-y: hidden;
+		width: 100%;
 	}
 
 	body {

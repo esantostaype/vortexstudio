@@ -1,27 +1,18 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/home/Hero.astro';
-import About from '../components/home/About.astro';
-import Services from '../components/home/Services.astro';
-import Projects from '../components/home/Projects.astro';
-import Contact from '../components/home/Contact.astro';
-import { getHome, getProjects, getServices } from '../services/vortex';
+import Layout from '../layouts/Layout.astro'
+import Hero from '../components/home/Hero.astro'
+import About from '../components/home/About.astro'
+import Services from '../components/home/Services.astro'
+import Projects from '../components/home/Projects.astro'
+import Contact from '../components/home/Contact.astro'
 
-const dataHome = await getHome();
-const services = await getServices();
-const projects = await getProjects();
-const about = dataHome.attributes.about;
-const hero = dataHome.attributes.hero;
-
-const { videoPoster } = hero;
-const heroVideoPoster = videoPoster.data.attributes.url;
 ---
 
-<Layout title="Estudio Digital en Lima, Perú | Vortex Studio" isHome videoPoster={ heroVideoPoster } >
-	<Hero hero={ hero } />
-	<About about={ about } />
-	<Services services={ services } title="¿Qué tienes en mente?" />
-	<Projects projects={ projects } title="Lo que hacemos" />
+<Layout title="Estudio Digital en Lima, Perú | Vortex Studio" isHome >
+	<Hero/>
+	<About/>
+	<Services title="¿Qué tienes en mente?" />
+	<Projects title="Lo que hacemos" />
 	<Contact />
 </Layout>
 
